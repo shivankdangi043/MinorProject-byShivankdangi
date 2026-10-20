@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RepoChat AI | Chat with your codebase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1>RepoChat<span>.ai</span></h1>
+          <p>Understand any codebase, faster.</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <label class="label" for="repoUrl">Add a repository</label>
+        <input id="repoUrl" type="url" placeholder="https://github.com/owner/repo" autocomplete="off" />
+        <button id="addBtn" class="btn-primary" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span>Upload &amp; Analyze</span>
+        </button>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="panel grow">
+        <div class="label">Your repositories</div>
+        <ul id="repoList" class="repo-list"></ul>
+      </section>
+
+      <p class="side-note">Public GitHub repositories only.</p>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+      <header class="topbar">
+        <button id="menuBtn" class="icon-btn" type="button" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <div class="titles">
+          <h2>Code Assistant</h2>
+          <p>Answers grounded in your repository</p>
+        </div>
+        <div class="pill" id="repoPill">
+          <span class="dot" id="repoDot"></span>
+          <span id="repoLabel">No repository selected</span>
+        </div>
+      </header>
+
+      <section id="messages" class="messages" aria-live="polite">
+        <div class="welcome" id="welcome">
+          <span class="eyebrow">Spring AI · RAG</span>
+          <h3>Ask your codebase <em>anything.</em></h3>
+          <p id="welcomeText">Add a GitHub repository on the left, select it, then ask about any file, class or piece of logic.</p>
+          <div class="chips">
+            <button class="chip" type="button">Give me an overview of this project</button>
+            <button class="chip" type="button">Where is the main entry point?</button>
+            <button class="chip" type="button">List all REST endpoints</button>
+            <button class="chip" type="button">How is configuration handled?</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="composer">
+        <div class="composer-box">
+          <textarea id="question" rows="1" placeholder="Ask about a file, class or function…" aria-label="Your question"></textarea>
+          <button id="sendBtn" class="send" type="button" aria-label="Send">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="hint">Enter to send · Shift + Enter for a new line</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
